@@ -38,6 +38,6 @@ Debido a todo los problemas mencionados anteriormente esta empresa decidió cont
 - **Position**(<u style="color: red">id</u>, title, hourly_rate)
 - **Monthly_bonus**(<u style="color: red">id</u>, type, description, bonus_porcentage, <u style="text-decoration:underline dotted">employee_id</u>)
 - **Workshift**(<u style="color: red">id</u>, name, start_time, end_time)
-- **Assigned_to**(<u style="text-decoration:underline dotted">employee_id</u>, <u style="text-decoration:underline dotted">workshift_id</u>)
+- **Assigned_to**(<u style="text-decoration:underline dotted">employee_id</u>, <u style="text-decoration:underline dotted">workshift_id</u>, date)
 - **Assistance**(<u style="color: red">id</u>, checkin_time, checkout_time, date, <u style="text-decoration:underline dotted">employee_id</u>, <u style="text-decoration:underline dotted">assigned_to_id</u>)
 - **Salary_payment**(<u style="color: red">id</u>, total_salary, date, salary_detail, <u style="text-decoration:underline dotted">employee_id</u>)

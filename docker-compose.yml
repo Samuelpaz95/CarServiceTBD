@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: carservices_db
+      MYSQL_USER: carservices_user
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes:
+      - db_data:/var/lib/mysql
+      - "./database/create_tables.sql:/docker-entrypoint-initdb.d/1.sql"
+    networks:
+      - carservice_net
+
+  admin:
+    image: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - carservice_net
+
+volumes:
+  db_data:
+
+
+networks:
+  carservice_net:
