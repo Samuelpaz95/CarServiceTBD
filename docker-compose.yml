@@ -6,14 +6,15 @@ services:
     container_name: mysql
     restart: always
     environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       MYSQL_DATABASE: carservices_db
       MYSQL_USER: carservices_user
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
     ports:
       - 3306:3306
     volumes:
       - db_data:/var/lib/mysql
-      - "./database/create_tables.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./database/carservices_db.sql:/docker-entrypoint-initdb.d/1.sql"
     networks:
       - carservice_net
 
