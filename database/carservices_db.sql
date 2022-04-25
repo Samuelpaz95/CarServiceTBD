@@ -23,7 +23,7 @@ CREATE TABLE `Assigned_to` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `Assigned_to` (`id`, `date`, `employee_id`, `workshift_id`) VALUES
-(1,	'2020-07-27 17:03:10',	1,	2),
+(1,	'2022-04-01 17:03:10',	1,	2),
 (2,	'2020-03-06 15:47:48',	2,	2),
 (3,	'2019-01-12 05:26:12',	3,	2),
 (4,	'2019-05-09 05:25:31',	4,	2),
@@ -108,7 +108,7 @@ INSERT INTO `Assistance` (`id`, `checkin_time`, `checkout_time`, `date`, `employ
 (25,	'09:38:37',	'13:17:36',	'2021-02-25 14:47:44',	7,	7),
 (26,	'10:07:16',	'18:47:23',	'2022-10-20 07:26:16',	15,	15),
 (27,	'11:38:21',	'15:33:53',	'2021-06-18 09:45:46',	31,	31),
-(28,	'12:04:16',	'14:04:09',	'2019-10-07 13:09:23',	1,	1),
+(28,	'12:04:16',	'14:04:09',	'2022-02-07 13:09:23',	1,	1),
 (29,	'11:58:52',	'13:12:21',	'2020-06-24 07:13:23',	6,	6),
 (30,	'12:28:26',	'14:27:22',	'2022-06-16 12:20:22',	20,	20),
 (31,	'10:11:33',	'14:05:28',	'2020-03-21 21:13:55',	18,	18),
@@ -185,7 +185,7 @@ INSERT INTO `Assistance` (`id`, `checkin_time`, `checkout_time`, `date`, `employ
 (102,	'10:11:41',	'16:28:08',	'2020-05-23 10:28:18',	2,	2),
 (103,	'10:53:07',	'18:29:21',	'2022-11-26 00:35:42',	38,	38),
 (104,	'12:00:38',	'17:19:47',	'2019-06-02 23:03:49',	17,	17),
-(105,	'12:21:50',	'18:31:33',	'2018-05-16 06:55:35',	1,	1),
+(105,	'12:21:50',	'18:31:33',	'2022-02-16 06:55:35',	1,	1),
 (106,	'09:49:48',	'13:44:36',	'2021-02-18 05:41:19',	11,	11),
 (107,	'10:59:41',	'18:25:39',	'2019-11-17 07:49:08',	19,	19),
 (108,	'08:03:15',	'13:09:26',	'2016-11-26 18:19:02',	31,	31),
@@ -315,7 +315,8 @@ INSERT INTO `Client` (`CI`, `first_name`, `last_name`, `phone_number`, `email`, 
 (19,	'Kirestin',	'Valenzuela',	76526007,	'velit@protonmail.net',	'A'),
 (20,	'Abraham',	'Hyde',	72585444,	'aliquam@icloud.couk',	'A'),
 (21,	'Daphne',	'Prince',	78215072,	'duis.a.mi@icloud.couk',	'A'),
-(22,	'Rhiannon',	'Lloyd',	77996641,	'turpis.nec@protonmail.org',	'A');
+(22,	'Rhiannon',	'Lloyd',	77996641,	'turpis.nec@protonmail.org',	'A'),
+(23,	'Juan Carlos',	'Díaz',	76434563,	'juan.diaz@carlosmail.com',	'B');
 
 DROP TABLE IF EXISTS `Consultation`;
 CREATE TABLE `Consultation` (
@@ -382,7 +383,9 @@ INSERT INTO `Consultation` (`id`, `reception_date`, `client_id`, `vehicle_id`) V
 (50,	'2018-09-30 04:59:46',	22,	13),
 (51,	'2016-09-02 08:24:42',	6,	8),
 (52,	'2016-12-21 23:02:28',	21,	9),
-(53,	'2020-10-28 07:43:57',	6,	5);
+(53,	'2020-10-28 07:43:57',	6,	5),
+(54,	'2022-03-25 01:52:24',	23,	23),
+(55,	'2022-03-25 02:11:24',	23,	23);
 
 DROP TABLE IF EXISTS `Detail`;
 CREATE TABLE `Detail` (
@@ -412,7 +415,7 @@ INSERT INTO `Detail` (`id`, `type`, `description`, `consultation_id`) VALUES
 (15,	'FALLA',	'magna tellus faucibus leo,',	26),
 (16,	'CONSULTA',	'hymenaeos. Mauris ut quam',	32),
 (17,	'CONSULTA',	'hendrerit a, arcu.',	48),
-(18,	'CONSULTA',	'elit, pharetra ut, pharetra sed, hendrerit a,',	22),
+(18,	'CONSULTA',	'se volvio a dañar el parachoque delantero',	13),
 (19,	'CONSULTA',	'nonummy. Fusce fermentum fermentum arcu. Vestibulum ante ipsum primis',	44),
 (20,	'FALLA',	'non',	5),
 (21,	'FALLA',	'massa. Integer vitae nibh. Donec est',	46),
@@ -446,7 +449,7 @@ INSERT INTO `Detail` (`id`, `type`, `description`, `consultation_id`) VALUES
 (49,	'FALLA',	'ut, sem. Nulla interdum. Curabitur dictum. Phasellus in felis.',	18),
 (50,	'FALLA',	'senectus et netus et malesuada fames ac turpis',	40),
 (51,	'FALLA',	'Aliquam vulputate ullamcorper magna. Sed eu eros. Nam consequat',	9),
-(52,	'FALLA',	'porttitor tellus',	16),
+(52,	'FALLA',	'Ejes descentreados',	16),
 (53,	'CONSULTA',	'auctor. Mauris vel turpis. Aliquam adipiscing lobortis',	50),
 (54,	'FALLA',	'lacus. Etiam bibendum fermentum metus. Aenean sed pede',	4),
 (55,	'FALLA',	'vestibulum lorem, sit',	18),
@@ -467,7 +470,7 @@ INSERT INTO `Detail` (`id`, `type`, `description`, `consultation_id`) VALUES
 (70,	'CONSULTA',	'Proin',	12),
 (71,	'CONSULTA',	'vehicula. Pellentesque',	51),
 (72,	'CONSULTA',	'Suspendisse aliquet, sem ut cursus luctus, ipsum leo',	12),
-(73,	'CONSULTA',	'purus. Nullam scelerisque neque',	22),
+(73,	'CONSULTA',	'daños en el parachoque delantero',	18),
 (74,	'CONSULTA',	'a nunc. In at',	15),
 (75,	'CONSULTA',	'Nunc laoreet lectus quis massa. Mauris vestibulum,',	39),
 (76,	'FALLA',	'Mauris magna. Duis dignissim tempor arcu. Vestibulum',	38),
@@ -586,16 +589,16 @@ INSERT INTO `Detail` (`id`, `type`, `description`, `consultation_id`) VALUES
 (189,	'FALLA',	'penatibus et',	8),
 (190,	'CONSULTA',	'odio. Aliquam vulputate ullamcorper magna. Sed eu',	29),
 (191,	'CONSULTA',	'velit justo nec',	26),
-(192,	'FALLA',	'aliquet diam. Sed diam lorem, auctor quis, tristique',	3),
+(192,	'FALLA',	'Aros Torcidos',	3),
 (193,	'FALLA',	'sagittis semper. Nam tempor diam',	24),
-(194,	'FALLA',	'eu tellus eu',	16),
+(194,	'FALLA',	'Engranajes desgastados',	16),
 (195,	'CONSULTA',	'augue ac ipsum. Phasellus vitae',	27),
 (196,	'CONSULTA',	'vel, faucibus id, libero. Donec',	10),
 (197,	'CONSULTA',	'egestas ligula. Nullam feugiat',	30),
 (198,	'FALLA',	'elit, dictum eu, eleifend nec, malesuada ut,',	50),
 (199,	'CONSULTA',	'amet, consectetuer adipiscing elit. Curabitur sed',	5),
 (200,	'FALLA',	'nisi sem',	51),
-(201,	'FALLA',	'rutrum eu, ultrices',	16),
+(201,	'FALLA',	'Filtro de conbustible averiado',	16),
 (202,	'CONSULTA',	'nec tellus. Nunc lectus pede,',	42);
 
 DROP TABLE IF EXISTS `Diagnosis`;
@@ -805,7 +808,7 @@ CREATE TABLE `Job_position` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `Job_position` (`id`, `title`, `hourly_rate`) VALUES
-(1,	'AYUDANTE',	5),
+(1,	'AYUDANTE',	8),
 (2,	'MECANICO',	10),
 (3,	'ELECTRO MECANICO',	12);
 
@@ -1084,28 +1087,29 @@ CREATE TABLE `Vehicle` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `Vehicle` (`id`, `chassis_code`, `plate_code`, `color`, `model_id`, `client_id`) VALUES
-(1,	'SV30-0169266',	'DAS123',	'rojo',	1,	1),
+(1,	'SV30-0169266',	'DAS123',	'rojo',	52,	1),
 (2,	'RAV4-0169266',	'GFD323',	'rosado',	1,	2),
 (3,	'MV65-3366336',	'JHI672',	'morado',	25,	3),
 (4,	'HG87-5982577',	'WUH415',	'blanco',	27,	4),
 (5,	'MG67-6332241',	'AII167',	'verda',	23,	5),
-(6,	'KV01-4647817',	'BDF951',	'blanco',	11,	6),
+(6,	'KV01-4647817',	'BDF951',	'rojo',	11,	6),
 (7,	'OU58-0320347',	'VHI732',	'verda',	21,	7),
 (8,	'MK53-9536628',	'QLI472',	'verda',	11,	8),
 (9,	'HI28-5432373',	'QRD593',	'amarillo',	7,	9),
 (10,	'XH08-3162469',	'OLK480',	'amarillo',	8,	10),
-(11,	'YN45-8212869',	'RHB478',	'amarillo',	31,	11),
+(11,	'YN45-8212869',	'RHB478',	'rojo',	31,	11),
 (12,	'FI77-4630178',	'NLB977',	'rosado',	9,	12),
 (13,	'ZT22-6011711',	'MRS324',	'blanco',	34,	13),
 (14,	'XM28-0284581',	'ISY965',	'morado',	28,	14),
-(15,	'XL39-2125249',	'PCQ774',	'celeste',	26,	15),
+(15,	'XL39-2125249',	'PCQ774',	'guindo',	26,	15),
 (16,	'FZ43-5441556',	'UKS854',	'celeste',	10,	16),
 (17,	'PM68-3242124',	'HJB678',	'amarillo',	2,	17),
 (18,	'XC56-1173613',	'PCZ609',	'rosado',	3,	18),
 (19,	'ED40-3261533',	'AKH355',	'amarillo',	17,	19),
 (20,	'PJ24-7862633',	'LWP291',	'negro',	19,	20),
 (21,	'BS14-9355121',	'KOV451',	'rojo',	35,	21),
-(22,	'TY63-1414414',	'JQX303',	'blanco',	12,	22);
+(22,	'TY63-1414414',	'JQX303',	'blanco',	12,	22),
+(23,	'GE30-0169266',	'FDW323',	'rosado',	3,	23);
 
 DROP TABLE IF EXISTS `vehicle_model`;
 CREATE TABLE `vehicle_model` (
@@ -1128,27 +1132,27 @@ INSERT INTO `vehicle_model` (`id`, `name`, `brand`, `year`, `type`) VALUES
 (8,	'VRD9',	'Audi.',	2012,	'CAMIONETA'),
 (9,	'IEN4',	'Mercedes-Benz.',	2018,	'CAMIONETA'),
 (10,	'QMT5',	'Renault.',	2011,	'AUTOMOVIL'),
-(11,	'VOR3',	'Lexus.',	2017,	'BAGONETA'),
-(12,	'BGG7',	'BMW.',	1990,	'BAGONETA'),
-(13,	'MPY2',	'Mercedes-Benz.',	2005,	'BAGONETA'),
-(14,	'EEQ4',	'Ford.',	1993,	'BAGONETA'),
+(11,	'VOR3',	'Lexus.',	2017,	'VAGONETA'),
+(12,	'BGG7',	'BMW.',	1990,	'VAGONETA'),
+(13,	'MPY2',	'Mercedes-Benz.',	2005,	'VAGONETA'),
+(14,	'EEQ4',	'Ford.',	1993,	'VAGONETA'),
 (15,	'WJD4',	'Renault.',	2012,	'AUTOMOVIL'),
 (16,	'YYG0',	'Opel.',	2002,	'AUTOMOVIL'),
 (17,	'NYP8',	'BMW.',	2007,	'AUTOMOVIL'),
 (18,	'IJB3',	'Ford.',	1986,	'AUTOMOVIL'),
 (19,	'DOO6',	'Lexus.',	2002,	'CAMIONETA'),
-(20,	'VFB7',	'Audi.',	1993,	'BAGONETA'),
+(20,	'VFB7',	'Audi.',	1993,	'VAGONETA'),
 (21,	'LQG9',	'Audi.',	1995,	'CAMIONETA'),
-(22,	'FKQ6',	'Audi.',	1992,	'BAGONETA'),
+(22,	'FKQ6',	'Audi.',	1992,	'VAGONETA'),
 (23,	'YUR3',	'Mercedes-Benz.',	2011,	'AUTOMOVIL'),
 (24,	'YVO1',	'Opel.',	1997,	'AUTOMOVIL'),
-(25,	'DDV0',	'Lexus.',	1999,	'BAGONETA'),
-(26,	'XSV3',	'Lexus.',	1986,	'BAGONETA'),
+(25,	'DDV0',	'Lexus.',	1999,	'VAGONETA'),
+(26,	'XSV3',	'Lexus.',	1986,	'VAGONETA'),
 (27,	'QRF1',	'Lexus.',	1988,	'CAMIONETA'),
-(28,	'FIT4',	'Opel.',	2005,	'BAGONETA'),
+(28,	'FIT4',	'Opel.',	2005,	'VAGONETA'),
 (29,	'JHB7',	'Opel.',	1988,	'CAMIONETA'),
-(30,	'XBX2',	'Renault.',	1993,	'BAGONETA'),
-(31,	'REL6',	'Audi.',	2001,	'BAGONETA'),
+(30,	'XBX2',	'Renault.',	1993,	'VAGONETA'),
+(31,	'REL6',	'Audi.',	2001,	'VAGONETA'),
 (32,	'XUL9',	'Seat.',	1986,	'CAMIONETA'),
 (33,	'OPU0',	'Ford.',	2018,	'AUTOMOVIL'),
 (34,	'GVD2',	'Renault.',	2011,	'AUTOMOVIL'),
@@ -1159,16 +1163,17 @@ INSERT INTO `vehicle_model` (`id`, `name`, `brand`, `year`, `type`) VALUES
 (39,	'EST1',	'BMW.',	2008,	'CAMIONETA'),
 (40,	'PUX6',	'Ford.',	1986,	'CAMIONETA'),
 (41,	'ELS2',	'BMW.',	1994,	'CAMIONETA'),
-(42,	'COC1',	'Opel.',	2015,	'BAGONETA'),
+(42,	'COC1',	'Opel.',	2015,	'VAGONETA'),
 (43,	'SBL7',	'Mercedes-Benz.',	1996,	'CAMIONETA'),
 (44,	'JLX5',	'Opel.',	2014,	'CAMIONETA'),
 (45,	'VQB5',	'Renault.',	2005,	'AUTOMOVIL'),
-(46,	'UEN6',	'Lexus.',	2013,	'BAGONETA'),
+(46,	'UEN6',	'Lexus.',	2013,	'VAGONETA'),
 (47,	'QSP7',	'Ford.',	2018,	'AUTOMOVIL'),
 (48,	'CBO4',	'Ford.',	1990,	'CAMIONETA'),
 (49,	'KUQ5',	'BMW.',	1988,	'CAMIONETA'),
 (50,	'SJF4',	'Opel.',	2019,	'AUTOMOVIL'),
-(51,	'HVR4',	'Ford.',	1991,	'AUTOMOVIL');
+(51,	'HVR4',	'Ford.',	1991,	'AUTOMOVIL'),
+(52,	'DSF',	'Mazda',	2001,	'AUTOMOVIL');
 
 DROP TABLE IF EXISTS `Workshift`;
 CREATE TABLE `Workshift` (
@@ -1184,4 +1189,4 @@ INSERT INTO `Workshift` (`id`, `name`, `start_time`, `end_time`) VALUES
 (2,	'TARDE',	'13:00:00',	'18:00:00'),
 (3,	'COMPLETO',	'08:00:00',	'17:00:00');
 
--- 2022-04-25 01:09:57
+-- 2022-04-25 05:31:07

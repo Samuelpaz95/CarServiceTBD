@@ -41,3 +41,16 @@ Debido a todo los problemas mencionados anteriormente esta empresa decidió cont
 - **Assigned_to**(<u style="text-decoration:underline dotted">employee_id</u>, <u style="text-decoration:underline dotted">workshift_id</u>, date)
 - **Assistance**(<u style="color: red">id</u>, checkin_time, checkout_time, date, <u style="text-decoration:underline dotted">employee_id</u>, <u style="text-decoration:underline dotted">assigned_to_id</u>)
 - **Salary_payment**(<u style="color: red">id</u>, total_salary, date, salary_detail, <u style="text-decoration:underline dotted">employee_id</u>)
+
+## start
+
+Ya tenemos una copia de la base de datos completa en el directirio `database` con el nombre de archivo `carservices_db.sql`.
+Puede ejecutar el Script en un motor de base de datos MySQL.
+
+Tambien si usted tiene instalado **docker** y **docker-compose** puede ejecutar el siguiente comando
+
+```bash
+docker-compose up -d
+```
+
+una vez que los servicios esten iniciados abra un navegador cualquiera y entre al puerto `localhost:8080` esto le llevará a una interfaz en la que tiene que ingresar las credenciales de la base de datos, estas credenciales estan en el archivo `docker-compose.yml`
