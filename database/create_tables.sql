@@ -5,11 +5,9 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP DATABASE IF EXISTS `carservices_db`;
 CREATE DATABASE `carservices_db` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `carservices_db`;
 
-DROP TABLE IF EXISTS `Assigned_to`;
 CREATE TABLE `Assigned_to` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -23,7 +21,6 @@ CREATE TABLE `Assigned_to` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Assistance`;
 CREATE TABLE `Assistance` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `checkin_time` time NOT NULL,
@@ -39,7 +36,6 @@ CREATE TABLE `Assistance` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Client`;
 CREATE TABLE `Client` (
   `CI` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL,
@@ -51,7 +47,6 @@ CREATE TABLE `Client` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Consultation`;
 CREATE TABLE `Consultation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `reception_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -65,7 +60,6 @@ CREATE TABLE `Consultation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Detail`;
 CREATE TABLE `Detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(100) NOT NULL,
@@ -77,7 +71,6 @@ CREATE TABLE `Detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Diagnosis`;
 CREATE TABLE `Diagnosis` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `diagnosis_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -90,7 +83,6 @@ CREATE TABLE `Diagnosis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Diagnosis_spare`;
 CREATE TABLE `Diagnosis_spare` (
   `diagnosis_id` int(11) NOT NULL,
   `spare_id` int(11) NOT NULL,
@@ -102,7 +94,6 @@ CREATE TABLE `Diagnosis_spare` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Diagnosis_supplie`;
 CREATE TABLE `Diagnosis_supplie` (
   `diagnosis_id` int(11) NOT NULL,
   `supplie_id` int(11) NOT NULL,
@@ -114,7 +105,6 @@ CREATE TABLE `Diagnosis_supplie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Employee`;
 CREATE TABLE `Employee` (
   `CI` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(100) NOT NULL,
@@ -131,19 +121,18 @@ CREATE TABLE `Employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Invoice`;
 CREATE TABLE `Invoice` (
   `code` int(11) NOT NULL AUTO_INCREMENT,
   `total_const` double NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `diagnosis_id` int(11) NOT NULL,
   PRIMARY KEY (`code`),
+  UNIQUE KEY `diagnosis_id_2` (`diagnosis_id`),
   KEY `diagnosis_id` (`diagnosis_id`),
   CONSTRAINT `Invoice_ibfk_1` FOREIGN KEY (`diagnosis_id`) REFERENCES `Diagnosis` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Job_position`;
 CREATE TABLE `Job_position` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
@@ -152,7 +141,6 @@ CREATE TABLE `Job_position` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Monthly_bonus`;
 CREATE TABLE `Monthly_bonus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(100) NOT NULL,
@@ -165,7 +153,6 @@ CREATE TABLE `Monthly_bonus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Repair`;
 CREATE TABLE `Repair` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` text,
@@ -180,7 +167,6 @@ CREATE TABLE `Repair` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Repair_equipment`;
 CREATE TABLE `Repair_equipment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sku_code` varchar(100) NOT NULL,
@@ -194,10 +180,10 @@ CREATE TABLE `Repair_equipment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Repair_equipment_task`;
 CREATE TABLE `Repair_equipment_task` (
   `task_id` int(11) NOT NULL,
   `repair_equipment_id` int(11) NOT NULL,
+  `usage_count` int(11) DEFAULT '1',
   PRIMARY KEY (`task_id`,`repair_equipment_id`),
   KEY `repair_equipment_id` (`repair_equipment_id`),
   CONSTRAINT `Repair_equipment_task_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `Task` (`id`),
@@ -205,7 +191,6 @@ CREATE TABLE `Repair_equipment_task` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Repair_type`;
 CREATE TABLE `Repair_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -214,7 +199,6 @@ CREATE TABLE `Repair_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Salary_payment`;
 CREATE TABLE `Salary_payment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `total_salary` double NOT NULL,
@@ -227,7 +211,6 @@ CREATE TABLE `Salary_payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Spare`;
 CREATE TABLE `Spare` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sku_code` varchar(100) NOT NULL,
@@ -239,7 +222,6 @@ CREATE TABLE `Spare` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Supplie`;
 CREATE TABLE `Supplie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sku_code` varchar(100) NOT NULL,
@@ -251,7 +233,6 @@ CREATE TABLE `Supplie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Task`;
 CREATE TABLE `Task` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
@@ -259,6 +240,7 @@ CREATE TABLE `Task` (
   `diagnosis_id` int(11) NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
   `repair_id` int(11) DEFAULT NULL,
+  `completed_at` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `diagnosis_id` (`diagnosis_id`),
   KEY `employee_id` (`employee_id`),
@@ -269,7 +251,6 @@ CREATE TABLE `Task` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Vehicle`;
 CREATE TABLE `Vehicle` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `chassis_code` varchar(255) NOT NULL,
@@ -285,7 +266,6 @@ CREATE TABLE `Vehicle` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `vehicle_model`;
 CREATE TABLE `vehicle_model` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -296,7 +276,6 @@ CREATE TABLE `vehicle_model` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Workshift`;
 CREATE TABLE `Workshift` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -306,4 +285,4 @@ CREATE TABLE `Workshift` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
--- 2022-04-25 05:34:03
+-- 2022-05-30 22:14:25

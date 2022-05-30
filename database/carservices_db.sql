@@ -9,6 +9,48 @@ DROP DATABASE IF EXISTS `carservices_db`;
 CREATE DATABASE `carservices_db` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `carservices_db`;
 
+DELIMITER ;;
+
+CREATE PROCEDURE `getTotalCost`()
+BEGIN
+INSERT INTO Invoice (diagnosis_id, total_const)
+SELECT Diagnosis.id,
+  sum(standar_price) + sum(total_usage_cost) + sum(COALESCE(spare_cost, 0)) + sum(COALESCE(supplies_cost, 0)) AS total_cost
+FROM Diagnosis
+  INNER JOIN (
+    SELECT standar_price,
+      Repair.diagnosis_id,
+      COALESCE(usage_cost, 0) * COALESCE(usage_count, 1) AS total_usage_cost
+    FROM Repair
+      INNER JOIN Repair_type ON Repair_type.id = repair_type_id
+      LEFT JOIN Task ON Task.repair_id = Repair.id
+      LEFT JOIN Repair_equipment_task AS RET ON RET.task_id = Task.id
+      LEFT JOIN (
+        SELECT id,
+          usage_cost
+        FROM Repair_equipment
+      ) AS RE ON RE.id = RET.repair_equipment_id
+  ) rep ON rep.diagnosis_id = Diagnosis.id
+  LEFT JOIN (
+    SELECT diagnosis_id,
+      count * unit_price AS spare_cost
+    FROM Diagnosis_spare
+      INNER JOIN Spare ON Spare.id = spare_id
+  ) AS spares ON spares.diagnosis_id = Diagnosis.id
+  LEFT JOIN (
+    SELECT diagnosis_id,
+      count * unit_price AS supplies_cost
+    FROM Diagnosis_supplie
+      INNER JOIN Spare ON Spare.id = supplie_id
+  ) AS supplies ON supplies.diagnosis_id = Diagnosis.id
+  AND completion_date IS NOT NULL
+WHERE Diagnosis.completion_date IS NOT NULL
+GROUP BY Diagnosis.id
+ON DUPLICATE KEY UPDATE total_const=total_const;
+END;;
+
+DELIMITER ;
+
 DROP TABLE IF EXISTS `Assigned_to`;
 CREATE TABLE `Assigned_to` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -614,11 +656,11 @@ CREATE TABLE `Diagnosis` (
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Diagnosis` (`id`, `diagnosis_date`, `completion_date`, `deadline`, `vehicle_id`) VALUES
-(1,	'2022-03-24 22:45:35',	NULL,	'2022-04-24 00:00:00',	1),
+(1,	'2022-03-24 22:45:35',	'2022-05-30',	'2022-04-24 00:00:00',	1),
 (2,	'2022-02-14 23:34:45',	NULL,	'2022-02-24 00:00:00',	2),
 (3,	'2022-04-25 00:19:11',	NULL,	'2021-08-07 09:14:59',	3),
 (4,	'2022-04-25 00:19:11',	NULL,	'2022-03-04 20:01:11',	4),
-(5,	'2022-04-25 00:19:11',	NULL,	'2022-02-20 23:36:21',	5),
+(5,	'2022-04-25 00:19:11',	'2022-05-30',	'2022-02-20 23:36:21',	5),
 (6,	'2022-04-25 00:19:11',	NULL,	'2021-09-19 18:17:53',	6),
 (7,	'2022-04-25 00:19:11',	NULL,	'2022-09-24 13:30:33',	7),
 (8,	'2022-04-25 00:19:11',	NULL,	'2021-08-10 13:11:29',	8),
@@ -627,7 +669,7 @@ INSERT INTO `Diagnosis` (`id`, `diagnosis_date`, `completion_date`, `deadline`, 
 (11,	'2022-04-25 00:19:11',	NULL,	'2022-07-04 12:43:00',	11),
 (12,	'2022-04-25 00:19:11',	NULL,	'2021-10-09 03:42:48',	12),
 (13,	'2022-04-25 00:19:12',	NULL,	'2021-08-02 00:01:43',	13),
-(14,	'2022-04-25 00:19:12',	NULL,	'2021-08-17 04:47:08',	14),
+(14,	'2022-04-25 00:19:12',	'2022-05-30',	'2021-08-17 04:47:08',	14),
 (15,	'2022-04-25 00:19:12',	NULL,	'2022-12-28 09:09:30',	15),
 (16,	'2022-04-25 00:19:12',	NULL,	'2022-04-11 07:46:40',	16),
 (17,	'2022-04-25 00:19:12',	NULL,	'2022-07-23 18:02:53',	17),
@@ -636,6 +678,17 @@ INSERT INTO `Diagnosis` (`id`, `diagnosis_date`, `completion_date`, `deadline`, 
 (20,	'2022-04-25 00:19:12',	NULL,	'2023-04-20 21:59:55',	20),
 (21,	'2022-04-25 00:19:12',	NULL,	'2022-12-06 17:20:31',	21),
 (22,	'2022-04-25 00:19:12',	NULL,	'2023-04-08 04:58:07',	22);
+
+DELIMITER ;;
+
+CREATE TRIGGER `calculateRepairTotalPrice` AFTER UPDATE ON `Diagnosis` FOR EACH ROW
+BEGIN 
+  IF NEW.completion_date IS NOT NULL THEN 
+    CALL getTotalCost();
+  END IF;
+END;;
+
+DELIMITER ;
 
 DROP TABLE IF EXISTS `Diagnosis_spare`;
 CREATE TABLE `Diagnosis_spare` (
@@ -794,10 +847,15 @@ CREATE TABLE `Invoice` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `diagnosis_id` int(11) NOT NULL,
   PRIMARY KEY (`code`),
+  UNIQUE KEY `diagnosis_id_2` (`diagnosis_id`),
   KEY `diagnosis_id` (`diagnosis_id`),
   CONSTRAINT `Invoice_ibfk_1` FOREIGN KEY (`diagnosis_id`) REFERENCES `Diagnosis` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
+INSERT INTO `Invoice` (`code`, `total_const`, `date`, `diagnosis_id`) VALUES
+(39,	3730,	'2022-05-30 22:11:53',	1),
+(40,	2856,	'2022-05-30 22:11:53',	5),
+(43,	1814,	'2022-05-30 22:12:20',	14);
 
 DROP TABLE IF EXISTS `Job_position`;
 CREATE TABLE `Job_position` (
@@ -1168,4 +1226,4 @@ INSERT INTO `Workshift` (`id`, `name`, `start_time`, `end_time`) VALUES
 (2,	'TARDE',	'13:00:00',	'18:00:00'),
 (3,	'COMPLETO',	'08:00:00',	'17:00:00');
 
--- 2022-05-30 17:11:45
+-- 2022-05-30 22:15:31

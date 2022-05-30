@@ -32,6 +32,7 @@ FROM Diagnosis
   ) AS supplies ON supplies.diagnosis_id = Diagnosis.id
   AND completion_date IS NOT NULL
 WHERE Diagnosis.completion_date IS NOT NULL
-GROUP BY Diagnosis.id;
+GROUP BY Diagnosis.id
+ON DUPLICATE KEY UPDATE total_const=total_const;
 END$$
 DELIMITER ;
