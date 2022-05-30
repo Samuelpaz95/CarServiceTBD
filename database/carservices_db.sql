@@ -20,7 +20,7 @@ CREATE TABLE `Assigned_to` (
   KEY `workshift_id` (`workshift_id`),
   CONSTRAINT `Assigned_to_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`CI`) ON DELETE CASCADE,
   CONSTRAINT `Assigned_to_ibfk_2` FOREIGN KEY (`workshift_id`) REFERENCES `Workshift` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Assigned_to` (`id`, `date`, `employee_id`, `workshift_id`) VALUES
 (1,	'2022-04-01 17:03:10',	1,	2),
@@ -78,7 +78,7 @@ CREATE TABLE `Assistance` (
   KEY `assigned_to_id` (`assigned_to_id`),
   CONSTRAINT `Assistance_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`CI`) ON DELETE CASCADE,
   CONSTRAINT `Assistance_ibfk_2` FOREIGN KEY (`assigned_to_id`) REFERENCES `Assigned_to` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Assistance` (`id`, `checkin_time`, `checkout_time`, `date`, `employee_id`, `assigned_to_id`) VALUES
 (1,	'10:23:19',	'15:45:39',	'2019-01-10 01:15:13',	9,	9),
@@ -291,7 +291,7 @@ CREATE TABLE `Client` (
   `email` varchar(255) NOT NULL,
   `client_type` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`CI`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Client` (`CI`, `first_name`, `last_name`, `phone_number`, `email`, `client_type`) VALUES
 (1,	'Carlos',	'Sejas',	76583849,	'carlos.sejas@umssmail.com',	'B'),
@@ -329,7 +329,7 @@ CREATE TABLE `Consultation` (
   KEY `vehicle_id` (`vehicle_id`),
   CONSTRAINT `Consultation_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `Client` (`CI`),
   CONSTRAINT `Consultation_ibfk_2` FOREIGN KEY (`vehicle_id`) REFERENCES `Vehicle` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Consultation` (`id`, `reception_date`, `client_id`, `vehicle_id`) VALUES
 (2,	'2022-04-24 22:43:33',	1,	1),
@@ -396,7 +396,7 @@ CREATE TABLE `Detail` (
   PRIMARY KEY (`id`),
   KEY `consultation_id` (`consultation_id`),
   CONSTRAINT `Detail_ibfk_1` FOREIGN KEY (`consultation_id`) REFERENCES `Consultation` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Detail` (`id`, `type`, `description`, `consultation_id`) VALUES
 (2,	'CONSULTA',	'Estaba manejando y de repente salio humo del capo de mi auto',	2),
@@ -611,31 +611,31 @@ CREATE TABLE `Diagnosis` (
   PRIMARY KEY (`id`),
   KEY `vehicle_id` (`vehicle_id`),
   CONSTRAINT `Diagnosis_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `Vehicle` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Diagnosis` (`id`, `diagnosis_date`, `completion_date`, `deadline`, `vehicle_id`) VALUES
-(1,	'2022-03-24 22:45:35',	'2022-04-24',	'2022-04-24 00:00:00',	1),
-(2,	'2022-02-14 23:34:45',	'2022-02-24',	'2022-02-24 00:00:00',	2),
-(3,	'2022-04-25 00:19:11',	'2021-06-12',	'2021-08-07 09:14:59',	3),
-(4,	'2022-04-25 00:19:11',	'2021-07-10',	'2022-03-04 20:01:11',	4),
-(5,	'2022-04-25 00:19:11',	'2022-01-13',	'2022-02-20 23:36:21',	5),
-(6,	'2022-04-25 00:19:11',	'2021-09-21',	'2021-09-19 18:17:53',	6),
-(7,	'2022-04-25 00:19:11',	'2021-11-10',	'2022-09-24 13:30:33',	7),
-(8,	'2022-04-25 00:19:11',	'2021-06-05',	'2021-08-10 13:11:29',	8),
-(9,	'2022-04-25 00:19:11',	'2023-03-03',	'2021-10-20 20:36:43',	9),
-(10,	'2022-04-25 00:19:11',	'2022-09-21',	'2022-04-20 01:03:07',	10),
-(11,	'2022-04-25 00:19:11',	'2022-05-12',	'2022-07-04 12:43:00',	11),
-(12,	'2022-04-25 00:19:11',	'2022-06-11',	'2021-10-09 03:42:48',	12),
-(13,	'2022-04-25 00:19:12',	'2021-12-18',	'2021-08-02 00:01:43',	13),
-(14,	'2022-04-25 00:19:12',	'2022-07-18',	'2021-08-17 04:47:08',	14),
-(15,	'2022-04-25 00:19:12',	'2021-11-16',	'2022-12-28 09:09:30',	15),
-(16,	'2022-04-25 00:19:12',	'2022-05-31',	'2022-04-11 07:46:40',	16),
-(17,	'2022-04-25 00:19:12',	'2022-04-03',	'2022-07-23 18:02:53',	17),
-(18,	'2022-04-25 00:19:12',	'2021-10-17',	'2022-07-30 11:50:17',	18),
-(19,	'2022-04-25 00:19:12',	'2021-11-13',	'2023-01-10 05:59:41',	19),
-(20,	'2022-04-25 00:19:12',	'2021-07-11',	'2023-04-20 21:59:55',	20),
-(21,	'2022-04-25 00:19:12',	'2022-05-28',	'2022-12-06 17:20:31',	21),
-(22,	'2022-04-25 00:19:12',	'2022-01-30',	'2023-04-08 04:58:07',	22);
+(1,	'2022-03-24 22:45:35',	NULL,	'2022-04-24 00:00:00',	1),
+(2,	'2022-02-14 23:34:45',	NULL,	'2022-02-24 00:00:00',	2),
+(3,	'2022-04-25 00:19:11',	NULL,	'2021-08-07 09:14:59',	3),
+(4,	'2022-04-25 00:19:11',	NULL,	'2022-03-04 20:01:11',	4),
+(5,	'2022-04-25 00:19:11',	NULL,	'2022-02-20 23:36:21',	5),
+(6,	'2022-04-25 00:19:11',	NULL,	'2021-09-19 18:17:53',	6),
+(7,	'2022-04-25 00:19:11',	NULL,	'2022-09-24 13:30:33',	7),
+(8,	'2022-04-25 00:19:11',	NULL,	'2021-08-10 13:11:29',	8),
+(9,	'2022-04-25 00:19:11',	NULL,	'2021-10-20 20:36:43',	9),
+(10,	'2022-04-25 00:19:11',	NULL,	'2022-04-20 01:03:07',	10),
+(11,	'2022-04-25 00:19:11',	NULL,	'2022-07-04 12:43:00',	11),
+(12,	'2022-04-25 00:19:11',	NULL,	'2021-10-09 03:42:48',	12),
+(13,	'2022-04-25 00:19:12',	NULL,	'2021-08-02 00:01:43',	13),
+(14,	'2022-04-25 00:19:12',	NULL,	'2021-08-17 04:47:08',	14),
+(15,	'2022-04-25 00:19:12',	NULL,	'2022-12-28 09:09:30',	15),
+(16,	'2022-04-25 00:19:12',	NULL,	'2022-04-11 07:46:40',	16),
+(17,	'2022-04-25 00:19:12',	NULL,	'2022-07-23 18:02:53',	17),
+(18,	'2022-04-25 00:19:12',	NULL,	'2022-07-30 11:50:17',	18),
+(19,	'2022-04-25 00:19:12',	NULL,	'2023-01-10 05:59:41',	19),
+(20,	'2022-04-25 00:19:12',	NULL,	'2023-04-20 21:59:55',	20),
+(21,	'2022-04-25 00:19:12',	NULL,	'2022-12-06 17:20:31',	21),
+(22,	'2022-04-25 00:19:12',	NULL,	'2023-04-08 04:58:07',	22);
 
 DROP TABLE IF EXISTS `Diagnosis_spare`;
 CREATE TABLE `Diagnosis_spare` (
@@ -742,7 +742,7 @@ CREATE TABLE `Employee` (
   PRIMARY KEY (`CI`),
   KEY `position_id` (`position_id`),
   CONSTRAINT `Employee_ibfk_1` FOREIGN KEY (`position_id`) REFERENCES `Job_position` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Employee` (`CI`, `first_name`, `last_name`, `age`, `address`, `email`, `phone_number`, `addmission_date`, `position_id`) VALUES
 (1,	'Jorge',	'Chávez',	28,	'av errique arce #123',	'jorge.chavez@masmail.com',	76543454,	'2022-04-24 22:50:09',	2),
@@ -805,7 +805,7 @@ CREATE TABLE `Job_position` (
   `title` varchar(100) NOT NULL,
   `hourly_rate` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Job_position` (`id`, `title`, `hourly_rate`) VALUES
 (1,	'AYUDANTE',	8),
@@ -837,31 +837,31 @@ CREATE TABLE `Repair` (
   KEY `diagnosis_id` (`diagnosis_id`),
   CONSTRAINT `Repair_ibfk_1` FOREIGN KEY (`repair_type_id`) REFERENCES `Repair_type` (`id`),
   CONSTRAINT `Repair_ibfk_2` FOREIGN KEY (`diagnosis_id`) REFERENCES `Diagnosis` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Repair` (`id`, `description`, `finish_date`, `repair_type_id`, `diagnosis_id`) VALUES
-(1,	'ser requiera un cambio de anillas y un mantenimiento de motor',	'2022-04-24 22:47:10',	1,	1),
-(2,	'Se realizará un mantenimento general',	'2022-02-24 23:37:16',	2,	2),
-(3,	'quis arcu vel quam',	'2022-03-02 18:27:23',	9,	6),
-(4,	'Integer tincidunt aliquam arcu. Aliquam ultrices iaculis odio. Nam interdum',	'2021-08-30 20:51:00',	9,	18),
-(5,	'enim. Nunc ut erat. Sed nunc est, mollis non, cursus',	'2022-08-07 11:20:14',	3,	16),
-(6,	'mus. Aenean eget magna. Suspendisse tristique neque',	'2022-06-29 06:48:04',	10,	4),
-(7,	'elit. Etiam laoreet, libero et tristique pellentesque, tellus',	'2023-01-05 09:39:30',	2,	12),
-(8,	'magna. Nam',	'2022-11-03 22:03:06',	5,	6),
-(9,	'nisi magna sed dui. Fusce',	'2022-05-28 01:56:06',	7,	20),
-(10,	'ac facilisis facilisis, magna',	'2021-08-18 17:59:12',	5,	5),
-(11,	'dis parturient montes, nascetur ridiculus mus.',	'2022-02-02 18:00:38',	10,	16),
-(12,	'imperdiet dictum magna. Ut tincidunt orci',	'2021-08-12 20:27:31',	11,	12),
-(13,	'fermentum vel, mauris. Integer',	'2022-07-18 14:36:41',	9,	15),
-(14,	'ornare, lectus ante dictum',	'2021-04-09 19:57:18',	3,	12),
-(15,	'Nullam ut nisi a odio semper cursus. Integer mollis.',	'2023-03-07 10:07:00',	5,	19),
-(16,	'mauris. Suspendisse aliquet molestie',	'2022-10-12 09:25:31',	6,	21),
-(17,	'sed sem egestas blandit. Nam',	'2021-05-02 09:11:25',	10,	7),
-(18,	'ipsum non arcu. Vivamus sit amet risus. Donec',	'2021-09-14 21:12:55',	10,	14),
-(19,	'mattis ornare, lectus ante dictum mi, ac mattis',	'2021-09-10 22:14:07',	5,	15),
-(20,	'ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam',	'2021-11-28 04:56:35',	6,	11),
-(21,	'ante ipsum primis in faucibus orci luctus et',	'2021-10-30 10:24:29',	1,	8),
-(22,	'Donec',	'2023-03-27 00:29:18',	12,	7);
+(1,	'ser requiera un cambio de anillas y un mantenimiento de motor',	NULL,	1,	1),
+(2,	'Se realizará un mantenimento general',	NULL,	2,	2),
+(3,	'quis arcu vel quam',	NULL,	9,	6),
+(4,	'Integer tincidunt aliquam arcu. Aliquam ultrices iaculis odio. Nam interdum',	NULL,	9,	18),
+(5,	'enim. Nunc ut erat. Sed nunc est, mollis non, cursus',	NULL,	3,	16),
+(6,	'mus. Aenean eget magna. Suspendisse tristique neque',	NULL,	10,	4),
+(7,	'elit. Etiam laoreet, libero et tristique pellentesque, tellus',	NULL,	2,	12),
+(8,	'magna. Nam',	NULL,	5,	6),
+(9,	'nisi magna sed dui. Fusce',	NULL,	7,	20),
+(10,	'ac facilisis facilisis, magna',	NULL,	5,	5),
+(11,	'dis parturient montes, nascetur ridiculus mus.',	NULL,	10,	16),
+(12,	'imperdiet dictum magna. Ut tincidunt orci',	NULL,	11,	12),
+(13,	'fermentum vel, mauris. Integer',	NULL,	9,	15),
+(14,	'ornare, lectus ante dictum',	NULL,	3,	12),
+(15,	'Nullam ut nisi a odio semper cursus. Integer mollis.',	NULL,	5,	19),
+(16,	'mauris. Suspendisse aliquet molestie',	NULL,	6,	21),
+(17,	'sed sem egestas blandit. Nam',	NULL,	10,	7),
+(18,	'ipsum non arcu. Vivamus sit amet risus. Donec',	NULL,	10,	14),
+(19,	'mattis ornare, lectus ante dictum mi, ac mattis',	NULL,	5,	15),
+(20,	'ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam',	NULL,	6,	11),
+(21,	'ante ipsum primis in faucibus orci luctus et',	NULL,	1,	8),
+(22,	'Donec',	NULL,	12,	7);
 
 DROP TABLE IF EXISTS `Repair_equipment`;
 CREATE TABLE `Repair_equipment` (
@@ -874,7 +874,7 @@ CREATE TABLE `Repair_equipment` (
   `usage_description` text,
   `purchase_date` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Repair_equipment` (`id`, `sku_code`, `unit_price`, `count`, `usage_cost`, `usage_type`, `usage_description`, `purchase_date`) VALUES
 (1,	'LKF634',	1000,	2,	10,	'SCANNER',	'Un scanner automotriz es una herramienta que se utiliza para diagnosticar las fallas electrónicas de un auto, específicamente las almacenadas en la computadora del mismo. Esta última se encarga de regular las funciones del motor a través de distintos sensores y registra todos los errores con un código.',	'2018-04-24 23:44:07');
@@ -883,31 +883,27 @@ DROP TABLE IF EXISTS `Repair_equipment_task`;
 CREATE TABLE `Repair_equipment_task` (
   `task_id` int(11) NOT NULL,
   `repair_equipment_id` int(11) NOT NULL,
+  `usage_count` int(11) DEFAULT '1',
   PRIMARY KEY (`task_id`,`repair_equipment_id`),
   KEY `repair_equipment_id` (`repair_equipment_id`),
   CONSTRAINT `Repair_equipment_task_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `Task` (`id`),
   CONSTRAINT `Repair_equipment_task_ibfk_2` FOREIGN KEY (`repair_equipment_id`) REFERENCES `Repair_equipment` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `Repair_equipment_task` (`task_id`, `repair_equipment_id`) VALUES
-(1,	1),
-(3,	1),
-(7,	1),
-(9,	1),
-(10,	1),
-(11,	1),
-(19,	1),
-(21,	1),
-(23,	1),
-(24,	1),
-(25,	1),
-(30,	1),
-(33,	1),
-(35,	1),
-(38,	1),
-(43,	1),
-(48,	1),
-(49,	1);
+INSERT INTO `Repair_equipment_task` (`task_id`, `repair_equipment_id`, `usage_count`) VALUES
+(1,	1,	1),
+(3,	1,	1),
+(7,	1,	1),
+(9,	1,	1),
+(11,	1,	1),
+(19,	1,	1),
+(21,	1,	1),
+(33,	1,	1),
+(35,	1,	1),
+(38,	1,	1),
+(43,	1,	1),
+(48,	1,	1),
+(49,	1,	1);
 
 DROP TABLE IF EXISTS `Repair_type`;
 CREATE TABLE `Repair_type` (
@@ -915,7 +911,7 @@ CREATE TABLE `Repair_type` (
   `name` varchar(100) NOT NULL,
   `standar_price` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Repair_type` (`id`, `name`, `standar_price`) VALUES
 (1,	'Reparacion de motor',	500),
@@ -953,7 +949,7 @@ CREATE TABLE `Spare` (
   `stock` int(11) DEFAULT NULL,
   `unit_price` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Spare` (`id`, `sku_code`, `name`, `car_model`, `stock`, `unit_price`) VALUES
 (1,	'ASD2312',	'Anillas de motor',	'Toyota',	123,	20),
@@ -989,7 +985,7 @@ CREATE TABLE `Supplie` (
   `stock` int(11) DEFAULT NULL,
   `unit_price` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Supplie` (`id`, `sku_code`, `name`, `type`, `stock`, `unit_price`) VALUES
 (1,	'KFE124',	'Aceite de motor',	'LUBRICANTE',	2,	320),
@@ -1008,6 +1004,7 @@ CREATE TABLE `Task` (
   `diagnosis_id` int(11) NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
   `repair_id` int(11) DEFAULT NULL,
+  `completed_at` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `diagnosis_id` (`diagnosis_id`),
   KEY `employee_id` (`employee_id`),
@@ -1015,61 +1012,43 @@ CREATE TABLE `Task` (
   CONSTRAINT `Task_ibfk_1` FOREIGN KEY (`diagnosis_id`) REFERENCES `Diagnosis` (`id`),
   CONSTRAINT `Task_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `Employee` (`CI`) ON DELETE SET NULL,
   CONSTRAINT `Task_ibfk_3` FOREIGN KEY (`repair_id`) REFERENCES `Repair` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
-INSERT INTO `Task` (`id`, `title`, `description`, `diagnosis_id`, `employee_id`, `repair_id`) VALUES
-(1,	'Cambio de anillas',	'Tiene que cambiar las anillas del motor',	1,	4,	1),
-(2,	'Mantenimiento general',	'Reailizar un mantenimiento general',	2,	32,	1),
-(3,	'Nulla',	'non sapien molestie orci tincidunt adipiscing. Mauris molestie',	15,	9,	13),
-(4,	'eu',	'laoreet posuere, enim',	3,	16,	NULL),
-(5,	'Phasellus',	'id, libero. Donec consectetuer mauris id sapien. Cras',	18,	16,	4),
-(6,	'ligula tortor,',	'dapibus ligula. Aliquam erat volutpat. Nulla dignissim.',	5,	15,	10),
-(7,	'id',	'eget magna. Suspendisse tristique',	11,	37,	20),
-(8,	'eros non',	'semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In',	15,	39,	13),
-(9,	'vel',	'elementum at, egestas a, scelerisque sed, sapien. Nunc',	1,	16,	1),
-(10,	'in molestie',	'ac turpis egestas.',	13,	22,	NULL),
-(11,	'tristique',	'ut, pharetra sed, hendrerit a, arcu.',	19,	20,	15),
-(12,	'gravida non,',	'est.',	14,	27,	18),
-(13,	'sed',	'tempor bibendum.',	8,	17,	21),
-(14,	'mauris blandit',	'a, scelerisque sed, sapien. Nunc pulvinar arcu',	14,	23,	18),
-(15,	'sed',	'auctor ullamcorper, nisl arcu iaculis enim, sit amet ornare',	13,	35,	NULL),
-(16,	'diam',	'at lacus. Quisque purus sapien, gravida non, sollicitudin',	6,	25,	3),
-(17,	'egestas. Duis',	'diam eu',	9,	17,	NULL),
-(18,	'Cras',	'ac turpis egestas. Aliquam fringilla cursus purus.',	10,	5,	NULL),
-(19,	'Morbi',	'elit. Nulla facilisi. Sed neque. Sed eget lacus. Mauris',	2,	21,	2),
-(20,	'Aliquam',	'sapien. Nunc pulvinar arcu et pede. Nunc sed',	13,	16,	NULL),
-(21,	'diam. Pellentesque',	'dapibus quam quis diam. Pellentesque habitant morbi tristique senectus et',	7,	38,	17),
-(22,	'orci.',	'quis arcu vel',	11,	11,	20),
-(23,	'malesuada fames',	'ut, molestie in, tempus eu,',	3,	36,	NULL),
-(24,	'vel arcu',	'non, bibendum sed,',	10,	17,	NULL),
-(25,	'posuere',	'Mauris non dui nec urna suscipit nonummy. Fusce fermentum',	3,	3,	NULL),
-(26,	'venenatis lacus.',	'at, libero. Morbi accumsan',	9,	4,	NULL),
-(27,	'Vestibulum accumsan',	'ante ipsum primis in faucibus orci luctus et ultrices posuere',	15,	13,	13),
-(28,	'nostra,',	'elit sed consequat auctor,',	16,	24,	5),
-(29,	'convallis',	'mauris ut',	17,	8,	NULL),
-(30,	'vel quam',	'vel turpis. Aliquam adipiscing lobortis risus. In',	9,	28,	NULL),
-(31,	'sociis',	'rutrum lorem ac risus. Morbi metus. Vivamus euismod',	13,	29,	NULL),
-(32,	'nisi nibh',	'malesuada vel, convallis in, cursus et, eros.',	10,	12,	NULL),
-(33,	'at',	'volutpat. Nulla facilisis. Suspendisse commodo tincidunt nibh. Phasellus nulla.',	11,	9,	20),
-(34,	'gravida sit',	'Mauris eu turpis. Nulla aliquet. Proin velit. Sed malesuada',	15,	21,	13),
-(35,	'lacus vestibulum',	'dui. Cras pellentesque. Sed dictum. Proin eget odio. Aliquam',	4,	32,	6),
-(36,	'diam lorem,',	'id risus',	18,	32,	4),
-(37,	'lacus,',	'neque. Nullam',	15,	7,	13),
-(38,	'Donec elementum,',	'justo. Proin non massa non ante',	14,	15,	18),
-(39,	'molestie dapibus',	'vulputate velit eu sem. Pellentesque ut',	9,	34,	NULL),
-(40,	'pede, ultrices',	'amet diam eu dolor',	1,	34,	1),
-(41,	'Pellentesque',	'Quisque porttitor eros nec tellus. Nunc lectus pede, ultrices',	12,	3,	7),
-(42,	'quam',	'mi. Aliquam gravida mauris ut mi. Duis risus odio, auctor',	13,	16,	NULL),
-(43,	'Nulla',	'non sapien molestie orci tincidunt adipiscing. Mauris molestie',	15,	9,	13),
-(44,	'eu',	'laoreet posuere, enim',	3,	16,	NULL),
-(45,	'Phasellus',	'id, libero. Donec consectetuer mauris id sapien. Cras',	18,	16,	4),
-(46,	'ligula tortor,',	'dapibus ligula. Aliquam erat volutpat. Nulla dignissim.',	5,	15,	10),
-(47,	'id',	'eget magna. Suspendisse tristique',	11,	37,	20),
-(48,	'eros non',	'semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In',	15,	39,	13),
-(49,	'vel',	'elementum at, egestas a, scelerisque sed, sapien. Nunc',	1,	16,	1),
-(50,	'in molestie',	'ac turpis egestas.',	13,	22,	NULL),
-(51,	'tristique',	'ut, pharetra sed, hendrerit a, arcu.',	19,	20,	15),
-(52,	'gravida non,',	'est.',	14,	27,	18);
+INSERT INTO `Task` (`id`, `title`, `description`, `diagnosis_id`, `employee_id`, `repair_id`, `completed_at`) VALUES
+(1,	'Cambio de anillas',	'Tiene que cambiar las anillas del motor',	1,	4,	1,	NULL),
+(2,	'Mantenimiento general',	'Reailizar un mantenimiento general',	2,	32,	1,	NULL),
+(3,	'Nulla',	'non sapien molestie orci tincidunt adipiscing. Mauris molestie',	15,	9,	13,	NULL),
+(5,	'Phasellus',	'id, libero. Donec consectetuer mauris id sapien. Cras',	18,	16,	4,	NULL),
+(6,	'ligula tortor,',	'dapibus ligula. Aliquam erat volutpat. Nulla dignissim.',	5,	15,	10,	NULL),
+(7,	'id',	'eget magna. Suspendisse tristique',	11,	37,	20,	NULL),
+(8,	'eros non',	'semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In',	15,	39,	13,	NULL),
+(9,	'vel',	'elementum at, egestas a, scelerisque sed, sapien. Nunc',	1,	16,	1,	NULL),
+(11,	'tristique',	'ut, pharetra sed, hendrerit a, arcu.',	19,	20,	15,	NULL),
+(12,	'gravida non,',	'est.',	14,	27,	18,	NULL),
+(13,	'sed',	'tempor bibendum.',	8,	17,	21,	NULL),
+(14,	'mauris blandit',	'a, scelerisque sed, sapien. Nunc pulvinar arcu',	14,	23,	18,	NULL),
+(16,	'diam',	'at lacus. Quisque purus sapien, gravida non, sollicitudin',	6,	25,	3,	NULL),
+(19,	'Morbi',	'elit. Nulla facilisi. Sed neque. Sed eget lacus. Mauris',	2,	21,	2,	NULL),
+(21,	'diam. Pellentesque',	'dapibus quam quis diam. Pellentesque habitant morbi tristique senectus et',	7,	38,	17,	NULL),
+(22,	'orci.',	'quis arcu vel',	11,	11,	20,	NULL),
+(27,	'Vestibulum accumsan',	'ante ipsum primis in faucibus orci luctus et ultrices posuere',	15,	13,	13,	NULL),
+(28,	'nostra,',	'elit sed consequat auctor,',	16,	24,	5,	NULL),
+(33,	'at',	'volutpat. Nulla facilisis. Suspendisse commodo tincidunt nibh. Phasellus nulla.',	11,	9,	20,	NULL),
+(34,	'gravida sit',	'Mauris eu turpis. Nulla aliquet. Proin velit. Sed malesuada',	15,	21,	13,	NULL),
+(35,	'lacus vestibulum',	'dui. Cras pellentesque. Sed dictum. Proin eget odio. Aliquam',	4,	32,	6,	NULL),
+(36,	'diam lorem,',	'id risus',	18,	32,	4,	NULL),
+(37,	'lacus,',	'neque. Nullam',	15,	7,	13,	NULL),
+(38,	'Donec elementum,',	'justo. Proin non massa non ante',	14,	15,	18,	NULL),
+(40,	'pede, ultrices',	'amet diam eu dolor',	1,	34,	1,	NULL),
+(41,	'Pellentesque',	'Quisque porttitor eros nec tellus. Nunc lectus pede, ultrices',	12,	3,	7,	NULL),
+(43,	'Nulla',	'non sapien molestie orci tincidunt adipiscing. Mauris molestie',	15,	9,	13,	NULL),
+(45,	'Phasellus',	'id, libero. Donec consectetuer mauris id sapien. Cras',	18,	16,	4,	NULL),
+(46,	'ligula tortor,',	'dapibus ligula. Aliquam erat volutpat. Nulla dignissim.',	5,	15,	10,	NULL),
+(47,	'id',	'eget magna. Suspendisse tristique',	11,	37,	20,	NULL),
+(48,	'eros non',	'semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In',	15,	39,	13,	NULL),
+(49,	'vel',	'elementum at, egestas a, scelerisque sed, sapien. Nunc',	1,	16,	1,	NULL),
+(51,	'tristique',	'ut, pharetra sed, hendrerit a, arcu.',	19,	20,	15,	NULL),
+(52,	'gravida non,',	'est.',	14,	27,	18,	NULL);
 
 DROP TABLE IF EXISTS `Vehicle`;
 CREATE TABLE `Vehicle` (
@@ -1084,7 +1063,7 @@ CREATE TABLE `Vehicle` (
   KEY `model_id` (`model_id`),
   CONSTRAINT `Vehicle_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `Client` (`CI`),
   CONSTRAINT `Vehicle_ibfk_2` FOREIGN KEY (`model_id`) REFERENCES `vehicle_model` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Vehicle` (`id`, `chassis_code`, `plate_code`, `color`, `model_id`, `client_id`) VALUES
 (1,	'SV30-0169266',	'DAS123',	'rojo',	52,	1),
@@ -1119,7 +1098,7 @@ CREATE TABLE `vehicle_model` (
   `year` int(4) NOT NULL,
   `type` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
 INSERT INTO `vehicle_model` (`id`, `name`, `brand`, `year`, `type`) VALUES
 (1,	'RAV4',	'Toyota',	1994,	'AUTOMOVIL'),
@@ -1182,11 +1161,11 @@ CREATE TABLE `Workshift` (
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 INSERT INTO `Workshift` (`id`, `name`, `start_time`, `end_time`) VALUES
 (1,	'MAÑANA',	'08:00:00',	'12:00:00'),
 (2,	'TARDE',	'13:00:00',	'18:00:00'),
 (3,	'COMPLETO',	'08:00:00',	'17:00:00');
 
--- 2022-04-25 05:31:07
+-- 2022-05-30 17:11:45
