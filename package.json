@@ -1,0 +1,33 @@
+{
+  "name": "carservices_db",
+  "version": "1.0.0",
+  "description": "this is our database workshop project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samuelpaz95/CarServiceTBD.git"
+  },
+  "author": "Willy Samuel Paz Colque",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Samuelpaz95/CarServiceTBD/issues"
+  },
+  "homepage": "https://github.com/Samuelpaz95/CarServiceTBD#readme",
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "morgan": "^1.10.0",
+    "timeago.js": "^4.0.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
