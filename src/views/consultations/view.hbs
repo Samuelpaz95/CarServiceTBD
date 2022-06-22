@@ -1,0 +1,62 @@
+<div class="container p-4">
+  <div class="text-center">
+    <h1>{{client_name}} consultation #{{id}}</h1>
+    <h2>{{reception_date}}</h2>
+  </div>
+  <div class="text-end">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailForm">
+      Add detail
+    </button>
+  </div>
+  <table class="table">
+    <h3>Details</h3>
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Type</th>
+        <th scope="col" class="text-center">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="col">ID</th>
+        <td>FALLA</td>
+        <td class="col-9">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur adipisci nihil ab? Magnam
+          dolore quis
+          expedita eaque minima. Eius, autem dolorem! Sed quasi quis dolore fugit ullam inventore magni ratione.</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Modal -->
+  <div class="modal fade" id="detailForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="type" class="col-form-label">Detail Types:</label>
+              <select class="form-control" name="type" id="type">
+                <option value="FAIL">FAIL</option>
+                <option value="DETAIL">DETAIL</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="col-form-label">Description:</label>
+              <textarea class="form-control" id="description" rows="5"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

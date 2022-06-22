@@ -1,0 +1,221 @@
+<div class='container p-4'>
+  <div class='row'>
+    <h1 class="text-center">Edit Client</h1>
+    <div class='col client-form'>
+      <div class="text-center">
+        <h3>Client Data</h3>
+        <hr>
+      </div>
+      <form method='post'>
+        <div class='form-group mb-3'>
+          <div class="row">
+            <div class="col-md-5">
+              <label for="CI" class="col-md-2 text-right">CI:</label>
+            </div>
+            <div class="col-md">
+              <input id="CI" type='number' class='form-control' value='{{client.CI}}' name='CI' placeholder='CI'
+                autofocus required />
+            </div>
+          </div>
+        </div>
+        <div class='form-group mb-3'>
+          <div class="row">
+            <div class="col-md-5">
+              <label for="first_name" class="col-md-2 text-right">first_name:</label>
+            </div>
+            <div class="col-md">
+              <input id="first_name" type='text' class='form-control' value='{{client.first_name}}' name='first_name'
+                placeholder='CI' autofocus required />
+            </div>
+          </div>
+        </div>
+        <div class='form-group mb-3'>
+          <div class="row">
+            <div class="col-md-5">
+              <label for="last_name" class="col-md-2 text-right">last_name:</label>
+            </div>
+            <div class="col-md">
+              <input id="last_name" type='text' class='form-control' value='{{client.last_name}}' name='last_name'
+                placeholder='last_name' autofocus required />
+            </div>
+          </div>
+        </div>
+        <div class='form-group mb-3'>
+          <div class="row">
+            <div class="col-md-5">
+              <label for="phone_number" class="col-md-2 text-right">phone_number:</label>
+            </div>
+            <div class="col-md">
+              <input id="phone_number" type='text' class='form-control' value='{{client.phone_number}}'
+                name='phone_number' placeholder='phone_number' autofocus required />
+            </div>
+          </div>
+        </div>
+        <div class='form-group mb-3'>
+          <div class="row">
+            <div class="col-md-5">
+              <label for="email" class="col-md-2 text-right">email:</label>
+            </div>
+            <div class="col-md">
+              <input id="email" type='email' class='form-control' value='{{client.email}}' name='email'
+                placeholder='email' autofocus required />
+            </div>
+          </div>
+        </div>
+        <div class='form-group text-center mb-3'>
+          <button class='btn btn-primary' type='submit'>Update Data</button>
+        </div>
+        <hr>
+      </form>
+    </div>
+    <div class="col">
+      <div class="text-center">
+        <h3>Consultations</h3>
+        <hr>
+      </div>
+      <table class="table">
+        <thead>
+          <div class="text-end">
+            <!-- Button trigger modal Add Consultations -->
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#NewConsultation">
+              +
+            </button>
+            {{!-- <a href="/consultations/{{client.CI}}" class="btn btn-success text-end">+</a> --}}
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Date</th>
+              <th scope="col" class="text-end">Actions</th>
+            </tr>
+          </div>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="col">1</th>
+            <td>2022-06-01</td>
+            <td class="text-end">
+              <a class="btn btn-primary" href="/consultations/12/{{client.CI}}">View</a>
+              <a class="btn btn-danger" href="#">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class='row'>
+    <div class="pt-3 text-center">
+      <h3>Registered Vehicles</h3>
+    </div>
+    <hr>
+    <div class="text-end"><a href="#" class="btn btn-success text-end">+</a></div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Chassis Code</th>
+        <th scope="col">Plate Code</th>
+        <th scope="col">Color</th>
+        <th scope="col">Model</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Year</th>
+        <th scope="col">Type</th>
+        <th scope="col" class="text-end">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="col">81273682</th>
+        <td>SKJ123</td>
+        <td>White</td>
+        <td>superModel</td>
+        <td>Toyota</td>
+        <td>2002</td>
+        <td>Bagoneta</td>
+        <td class="text-end">
+          <a class="btn btn-primary" href="/clients/edit/{{CI}}">Edit</a>
+          <a class="btn btn-danger" href="/clients/delete">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Modal Vehicles List -->
+  <div class="modal fade" id="NewConsultation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Select vehicle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Chassis Code</th>
+                <th scope="col">Plate Code</th>
+                <th scope="col">Color</th>
+                <th scope="col">Model</th>
+              </tr>
+            </thead>
+            <tbody>
+              <form>
+                <tr>
+                  <th>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="vehicle_id" id="vehicle1" checked>
+                      <label class="form-check-label" for="vehicle1">1</label>
+                    </div>
+                  </th>
+                  <td>1123lkj12</td>
+                  <td>SDF323</td>
+                  <td>White</td>
+                  <td>12-series</td>
+                </tr>
+                <tr>
+                  <th>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="vehicle_id" id="vehicle2" checked>
+                      <label class="form-check-label" for="vehicle2">2</label>
+                    </div>
+                  </th>
+                  <td>1123lkj12</td>
+                  <td>SDF323</td>
+                  <td>White</td>
+                  <td>12-series</td>
+                </tr>
+              </form>
+            </tbody>
+          </table>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#VehicleForm">
+            Add new vehicle
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end modal -->
+  <!-- vehicle form modal -->
+  <div class="modal fade" id="VehicleForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Select vehicle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#NewConsultation">Close</button>
+          <button type="button" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end modal -->
+</div>

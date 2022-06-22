@@ -1,0 +1,43 @@
+<div class="container p-4">
+  <div class="row">
+    <div class="m-4 text-center">
+      <div class="col-md-4 mx-auto">
+        <a href="/clients/add" class="btn btn-primary">Add new client</a>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">CI</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Category</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each clients }}
+        <tr>
+          <th scope="row">{{CI}}</th>
+          <td>{{first_name}}</td>
+          <td>{{last_name}}</td>
+          <td>{{phone_number}}</td>
+          <td>{{email}}</td>
+          <td>{{client_type}}</td>
+          <td>
+            <a class="btn btn-primary" href="/clients/edit/{{CI}}">Edit</a>
+            <a class="btn btn-danger" href="/clients/delete">Delete</a>
+          </td>
+        </tr>
+        {{else}}
+        <div class="col-md-4 mx-auto">
+          <div class="card card-body text-center">
+            <p>There are not links saved yet.</p>
+          </div>
+        </div>
+        {{/each}}
+      </tbody>
+  </div>
+</div>
