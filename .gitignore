@@ -6,3 +6,4 @@ CarServiceProblem.pdf
 images/
 # nodejs modules
 node_modules
+.env

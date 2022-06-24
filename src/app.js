@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const flash = require('connect-flash');
 const session = require('express-session');
+const db = require('./lib/database');
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use('/consultations', require('./routes/consultations_view'));
 // public
 app.use(express.static(join(__dirname, 'public')));
 
-app.listen(app.get('port'), () => {
+app.listen(app.get('port'), async () => {
+  await db.initSession();
   console.log(`Server on port ${app.get('port')}`);
 });

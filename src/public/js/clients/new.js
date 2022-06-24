@@ -112,7 +112,6 @@ const updateDetail = (evt) => {
   const button = evt.delegateTarget;
   const index = Number(button.id);
   currentDetail = details[index];
-  console.log(currentDetail);
   const elementId = button.getAttribute('data-bs-target').replace('Modal', '');
   const form = document.querySelector(elementId);
   Object.keys(currentDetail).forEach((key) => {
@@ -135,7 +134,6 @@ document.getElementById('addVehicle').onclick = (etv) => {
 
 const vehicleForm = document.getElementById('vehicleForm');
 vehicleForm.addEventListener('submit', (evt) => {
-  console.log(evt);
   if (evt.preventDefault) evt.preventDefault();
   try {
     const entries = new FormData(evt.target).entries();
@@ -160,7 +158,6 @@ vehicleForm.addEventListener('submit', (evt) => {
       }
     }
     vehicle.model = models[modelKey];
-    console.log(vehicle);
 
     if (!currentVehicle) {
       vehicles.push(vehicle);
@@ -178,7 +175,6 @@ const updateVehicle = (evt) => {
   const button = evt.delegateTarget;
   const index = Number(button.id);
   currentVehicle = vehicles[index];
-  console.log(currentVehicle);
   const elementId = button.getAttribute('data-bs-target').replace('Modal', '');
   const form = document.querySelector(elementId);
   Object.keys(currentVehicle).forEach((key) => {
@@ -209,7 +205,7 @@ document.getElementById('saveClientButton').onclick = async (evt) => {
     }
     const data = await res.json();
     console.log(data);
-    alert(data);
+    alert(data.msg);
   } catch (error) {
     console.log(error);
     throw error;
