@@ -5,6 +5,8 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+INSTALL PLUGIN mysqlx SONAME 'mysqlx.so';
+
 DROP DATABASE IF EXISTS `carservices_db`;
 CREATE DATABASE `carservices_db` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `carservices_db`;

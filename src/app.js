@@ -1,4 +1,4 @@
-const { join } = require('path');
+const { join, resolve } = require('path');
 const { v4: uuid } = require('uuid');
 const express = require('express');
 const exphbs = require('express-handlebars');

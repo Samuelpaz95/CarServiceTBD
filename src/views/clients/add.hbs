@@ -1,31 +1,254 @@
-<div class="container p-4">
-  <div class="row">
-    <div class="col-md-4 mx-auto text-center">
-      <h1>Add new Client</h1>
-      <div class="card">
-        <div class="card-body">
-          <form method="post">
-            <div class="form-group mb-3">
-              <input type="number" class="form-control" , name="CI" , placeholder="CI" autofocus required>
+<div class='container p-4'>
+  <div class='row'>
+    <h1 class="text-center">Add New Client</h1>
+    <div class='form-group text-end mb-5'>
+      <button id="saveClientButton" class='btn btn-primary' type='button'>Save new client</button>
+    </div>
+    <div class='col client-form'>
+      <div class="text-center">
+        <h3>Client Data</h3>
+        <hr>
+      </div>
+      <form id="clientForm">
+        <div class='form-group mb-3'>
+          <div class="row">
+            <div class="col-md-5">
+              <label for="CI" class="col-md-2 text-right">CI:</label>
             </div>
-            <div class="form-group mb-3">
-              <input type="text" class="form-control" , name="first_name" , placeholder="first_name" required>
+            <div class="col-md">
+              <input id="CI" type='number' class='form-control' name='CI' placeholder='CI' autofocus required />
             </div>
-            <div class="form-group mb-3">
-              <input type="text" class="form-control" , name="last_name" , placeholder="last_name" required>
+          </div>
+        </div>
+        <div class='form-group mb-3'>
+          <div class="row">
+            <div class="col-md-5">
+              <label for="first_name" class="col-md-2 text-right">First name:</label>
             </div>
-            <div class="form-group mb-3">
-              <input type="text" class="form-control" , name="phone_number" , placeholder="phone_number" required>
+            <div class="col-md">
+              <input id="first_name" type='text' class='form-control' value='{{client.first_name}}' name='first_name'
+                placeholder='First name' autofocus required />
             </div>
-            <div class="form-group mb-3">
-              <input type="email" class="form-control" , name="email" , placeholder="email" required>
+          </div>
+        </div>
+        <div class='form-group mb-3'>
+          <div class="row">
+            <div class="col-md-5">
+              <label for="last_name" class="col-md-2 text-right">Last name:</label>
             </div>
-            <div class="form-group d-grid gap-2">
-              <button class="btn btn-primary" type="submit">Save </button>
+            <div class="col-md">
+              <input id="last_name" type='text' class='form-control' value='{{client.last_name}}' name='last_name'
+                placeholder='Last name' autofocus required />
+            </div>
+          </div>
+        </div>
+        <div class='form-group mb-3'>
+          <div class="row">
+            <div class="col-md-5">
+              <label for="phone_number" class="col-md-2 text-right">Phone number:</label>
+            </div>
+            <div class="col-md">
+              <input id="phone_number" type='text' class='form-control' value='{{client.phone_number}}'
+                name='phone_number' placeholder='Phone number' autofocus required />
+            </div>
+          </div>
+        </div>
+        <div class='form-group mb-3'>
+          <div class="row">
+            <div class="col-md-5">
+              <label for="email" class="col-md-2 text-right">Email:</label>
+            </div>
+            <div class="col-md">
+              <input id="email" type='email' class='form-control' value='{{client.email}}' name='email'
+                placeholder='Email' autofocus required />
+            </div>
+          </div>
+        </div>
+        <hr>
+      </form>
+    </div>
+    <div class="col">
+      <div class="text-center">
+        <h3>Consultation Data</h3>
+        <hr>
+      </div>
+      <table id="detailsTable" class="table">
+        <div class="row">
+          <div class="col">
+            <h3>Details</h3>
+          </div>
+          <div class="col text-end">
+            <!-- Button trigger modal Add Detail -->
+            <button id="addDetail" type="button" class="btn btn-success" data-bs-toggle="modal"
+              data-bs-target="#detailFormModal">
+              +
+            </button>
+          </div>
+        </div>
+
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Type</th>
+            <th scope="col" class="text-center">Description</th>
+            <th scope="col" class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <div class='row'>
+    <div class="pt-3 text-center">
+      <h3>Registered Vehicles</h3>
+    </div>
+    <hr>
+    <div class="col text-end">
+      <button id="addVehicle" type="button" class="btn btn-success" data-bs-toggle="modal"
+        data-bs-target="#vehicleFormModal">
+        +
+      </button>
+    </div>
+  </div>
+  <table id="vehicleTable" class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Chassis Code</th>
+        <th scope="col">Plate Code</th>
+        <th scope="col">Color</th>
+        <th scope="col">Model</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Year</th>
+        <th scope="col">Type</th>
+        <th scope="col" class="text-end">Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- vehicle form modal -->
+  <div class="modal fade" id="vehicleFormModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">New Vehicle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="vehicleForm" method="post">
+            <div class='form-group mb-3'>
+              <div class="row">
+                <div class="col d-flex justify-content-center">
+                  <label for="chassis_code" class="my-auto">Chassis code:</label>
+                </div>
+                <div class="col">
+                  <input id="chassis_code" type='text' class='form-control' name='chassis_code'
+                    placeholder='Chassis code' autofocus required />
+                </div>
+              </div>
+            </div>
+            <div class='form-group mb-3'>
+              <div class="row">
+                <div class="col d-flex justify-content-center">
+                  <label for="plate_code" class="my-auto">Plate code:</label>
+                </div>
+                <div class="col">
+                  <input id="plate_code" type='text' class='form-control' name='plate_code' placeholder='Plate code'
+                    autofocus required />
+                </div>
+              </div>
+            </div>
+            <div class='form-group mb-3'>
+              <div class="row">
+                <div class="col d-flex justify-content-center">
+                  <label for="color" class="my-auto">Color:</label>
+                </div>
+                <div class="col">
+                  <select id="color" class="form-control" name="color">
+                    <option value="white">white</option>
+                    <option value="black">black</option>
+                    <option value="red">red</option>
+                    <option value="blue">blue</option>
+                    <option value="yellow">yellow</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class='form-group mb-3'>
+              <div class="row">
+                <div class="col d-flex justify-content-center">
+                  <label for="model_name" class="my-auto">Model name:</label>
+                </div>
+                <div class="col">
+                  <select id="color" class="form-control" name="model_name">
+                    <option value="TOYOTA-12">TOYOTA-12</option>
+                    <option value="TESLA-24">TESLA-24</option>
+                    <option value="SUBARU-95">SUBARU-95</option>
+                    <option value="HOMERCAR-32">HOMERCAR-32</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class='form-group mb-3'>
+              <div class="row">
+                <div class="col d-flex justify-content-center">
+                  <label for="model_type" class="my-auto">Model type:</label>
+                </div>
+                <div class="col">
+                  <select id="model_type" class="form-control" name="model_type">
+                    <option value="bagoneta">bagoneta</option>
+                    <option value="automovil">automovil</option>
+                    <option value="camioneta">camioneta</option>
+                    <option value="motocicleta">motocicleta</option>
+                  </select>
+                </div>
+              </div>
             </div>
           </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="vehicleForm">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end modal -->
+  <!-- Modal Detail form-->
+  <div class="modal fade" id="detailFormModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">New Detail</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="detailForm" method="post">
+            <div class="mb-3">
+              <label for="type" class="col-form-label">Detail Types:</label>
+              <select class="form-control" name="type" id="type">
+                <option value="FAIL">FAIL</option>
+                <option value="DETAIL">DETAIL</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="col-form-label">Description:</label>
+              <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="detailForm">Add</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script src="/js/clients/models.js"></script>
+<script src="/js/clients/new.js"></script>

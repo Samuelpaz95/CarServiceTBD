@@ -1,0 +1,7 @@
+TRANSACTION 
+BEGIN 
+INSERT INTO Client VALUES ('.....')
+INSERT INTO Consultation VALUES ('.....')
+INSERT INTO Vehicles VALUES ('.....')
+COMMIT
+END
